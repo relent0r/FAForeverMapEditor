@@ -10,6 +10,13 @@ using System.Text;
 using UnityEngine;
 
 namespace SFB {
+    // Native Linux implementation of IStandaloneFileBrowser for Unity.
+    // Intent: Binds Unity file panel calls to native Linux desktop file pickers.
+    // Execution; Fallback: Attempts to execute zenity first; 
+    // if unavailable, gracefully falls back to kdialog.
+    // Uses an ASCII record separator (<c>(char)28</c>) for Zenity multi-selection to safely handle spaces and special characters in filenames.
+    // Normalizes directory paths with trailing slashes for Zenity compatibility.
+
     public class StandaloneFileBrowserLinux : IStandaloneFileBrowser {
         private const char MultiSelectSeparator = (char)28;
 
